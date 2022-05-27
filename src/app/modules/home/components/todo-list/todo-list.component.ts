@@ -17,4 +17,17 @@ export class TodoListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  setNewTaskList(newTask :string) {
+    this.taskList.push({
+      task: newTask,
+      checked: false
+    })
+  }
+
+  deleteTask(i: number) {
+    const teste = confirm('Tu desejas realmente apagar essa tarefa ?')
+    if (teste) {
+      this.taskList.splice(i, 1)
+    }
+  }
 }

@@ -4,7 +4,7 @@
       <input type="checkbox"  [(ngModel)]="task.checked">
       <input type="text"  [(ngModel)]="task.task">
 
-      <button>
+      <button (click)="deleteTask(i)">
         <img src="assets/icons/Vector.svg" alt="">
       </button>
     </li>
@@ -12,5 +12,5 @@
 </section>
 
 
-<app-todo-add-itens></app-todo-add-itens>
+<app-todo-add-itens (newTaskEmiter)="setNewTaskList($event)"></app-todo-add-itens>
 <app-todo-button-delete-all *ngIf="taskList.length"></app-todo-button-delete-all>
