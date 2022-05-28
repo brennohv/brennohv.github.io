@@ -2,7 +2,7 @@
   <ul *ngIf="taskList.length">
     <li *ngFor="let task of taskList; let i = index">
       <input type="checkbox"  [(ngModel)]="task.checked">
-      <input type="text"  [(ngModel)]="task.task">
+      <input type="text"  [(ngModel)]="task.task" [ngClass]="{'checked' : task.checked}" (keyup.backspace)="lastWord(task.task ,i)" >
 
       <button (click)="deleteTask(i)">
         <img src="assets/icons/Vector.svg" alt="">
@@ -13,4 +13,4 @@
 
 
 <app-todo-add-itens (newTaskEmiter)="setNewTaskList($event)"></app-todo-add-itens>
-<app-todo-button-delete-all *ngIf="taskList.length"></app-todo-button-delete-all>
+<app-todo-button-delete-all *ngIf="taskList.length" (click)="deleteAll()"></app-todo-button-delete-all>

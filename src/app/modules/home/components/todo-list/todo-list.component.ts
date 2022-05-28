@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { TaskList } from '../../model/task-list';
 
 @Component({
@@ -6,15 +6,16 @@ import { TaskList } from '../../model/task-list';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit {
-  public taskList: TaskList[] = [
-    {task: 'Arrumar a casa', checked: true},
-    {task: 'Estudar', checked: false},
-  ]
+export class TodoListComponent implements DoCheck {
+  public taskList: TaskList[] = JSON.parse(localStorage.getItem('list') || '[]')
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngDoCheck(): void {
+    if (this.taskList.length) {
+      this.sortTaskList()
+    }
+    this.setLocalStorage()
   }
 
   setNewTaskList(newTask :string) {
@@ -29,5 +30,31 @@ export class TodoListComponent implements OnInit {
     if (teste) {
       this.taskList.splice(i, 1)
     }
+  }
+
+  deleteWithoutConfirm(i: number) {
+    this.taskList.splice(i, 1)
+  }
+
+  lastWord(task: string , i: number) {
+    if (!task.length) {
+      const confirmação = confirm('deseja excluir a tarefa vazia ?')
+
+      if (confirmação) {
+        this.deleteWithoutConfirm(i)
+      }
+    }
+  }
+
+  deleteAll() {
+    this.taskList = []
+  }
+
+  sortTaskList () {
+    this.taskList.sort(( first, second) => Number(first.checked) - Number(second.checked) )
+  }
+
+  setLocalStorage() {
+    localStorage.setItem('list', JSON.stringify(this.taskList))
   }
 }
