@@ -1,4 +1,7 @@
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { FoodList } from '../modules/home/model/food-list';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +12,21 @@ export class TaskListService {
 
   private list: string[] = [];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public taskFoodList() {
-    return this.list
+  public url = 'http://localhost:3000/'
+
+  public taskFoodList(): Observable<FoodList[]> {
+    return this.http.get<FoodList[]>(`${this.url}foodList`)
+    // return this.list
   }
 
-  public newTaskFood(newFood: string) {
-    this.olhaOEvento.emit(newFood)
-    return this.list.push(newFood)
+  public newTaskFood(newFood: string): Observable<FoodList> {
+    return this.http.post<FoodList>(`${this.url}foodList`, { name: newFood})
   }
+
+  // public newTaskFood(newFood: string) {
+  //   this.olhaOEvento.emit(newFood)
+  //   return this.list.push(newFood)
+  // }
 }
