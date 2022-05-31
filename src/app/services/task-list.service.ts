@@ -8,7 +8,7 @@ import { FoodList } from '../modules/home/model/food-list';
 })
 export class TaskListService {
 
-  public olhaOEvento = new EventEmitter
+  public foodListMudou = new EventEmitter
 
   private list: string[] = [];
 
@@ -25,8 +25,16 @@ export class TaskListService {
     return this.http.post<FoodList>(`${this.url}foodList`, { name: newFood})
   }
 
+  public deleteTaskFood(id: number): Observable<FoodList> {
+    return this.http.delete<FoodList>(`${this.url}foodList/${id}`)
+  }
+
+  public updateTaskFood(newFood: string ,id: number): Observable<FoodList> {
+    return this.http.put<FoodList>(`${this.url}foodList/${id}`, {name: newFood})
+  }
+
   // public newTaskFood(newFood: string) {
-  //   this.olhaOEvento.emit(newFood)
+  //   this.foodListMudou.emit(newFood)
   //   return this.list.push(newFood)
   // }
 }

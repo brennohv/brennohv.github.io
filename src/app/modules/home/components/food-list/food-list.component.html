@@ -1,2 +1,6 @@
 <app-food-add></app-food-add>
-<li *ngFor="let food of foodList">{{ food.name }} </li>
+<li *ngFor="let food of foodList">
+  <input type="text" [(ngModel)]="food.name">
+  <button (click)="deleteFood(food.id)">delete food</button>
+  <button (click)="updateFood(food.name ,food.id)">Update food</button>
+</li>

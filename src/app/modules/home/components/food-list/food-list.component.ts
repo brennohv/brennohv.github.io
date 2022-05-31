@@ -18,9 +18,31 @@ export class FoodListComponent implements OnInit {
       next: (res: FoodList[]) => this.foodList = res
     })
 
-    this.taskListService.olhaOEvento.subscribe({
-      next: (res: FoodList) => this.foodList.push(res)
+    this.taskListService.foodListMudou.subscribe({
+      next: (res: FoodList) => this.taskListService.taskFoodList().subscribe({
+        next: (res: FoodList[]) => this.foodList = res
+      })
     })
   }
+
+  public deleteFood(id: number) {
+    this.taskListService.deleteTaskFood(id).subscribe({
+      next: (res: FoodList) => {
+        this.taskListService.foodListMudou.emit(res)
+        // this.foodList = this.foodList.filter((allFood) => {
+        //  return id !== allFood.id
+        // })
+      }
+    })
+  }
+
+  public updateFood(value: string, id: number) {
+    this.taskListService.updateTaskFood(value, id).subscribe({
+      next: (res: FoodList) => {
+        this.taskListService.foodListMudou.emit(res)
+      }
+    })
+  }
+
 
 }

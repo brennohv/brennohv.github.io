@@ -17,8 +17,8 @@ export class FoodAddComponent implements OnInit {
   addNewFood(food: string) {
     this.taskListService.newTaskFood(food).subscribe({
       next: (res) => {
-        this.taskListService.olhaOEvento.emit(res)
-        alert(`Você acabou de acidionar ${food} a sua lista de comida.`)}
+        this.taskListService.foodListMudou.emit(res)
+        }
     })
     this.inputValue = ''
   }
