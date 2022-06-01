@@ -1,0 +1,50 @@
+<form #templateRef="ngForm" (ngSubmit)="submitForm(templateRef)">
+  <label for="nome">Ola
+    <input type="text" name="nome" #inputText="ngModel" [ngModel]="inputText.value" required>
+  </label>
+
+  {{ inputText.valid }} {{  inputText.invalid }} {{  inputText.dirty }} {{ inputText.touched }}
+  {{ inputText.value }}
+
+  <span *ngIf="inputText.invalid">Invalid</span>
+  <br>
+  <br>
+  <label for="nome">Masculino
+    <input type="radio" name="sexo" value="masculino" ngModel>
+  </label>
+  <br>
+  <label for="nome">Feminino
+    <input type="radio" name="sexo" value="feminino" ngModel>
+  </label>
+  <br>
+  <label for="nome">Outros
+    <input type="radio" name="sexo" value="outros" ngModel>
+  </label>
+  <br>
+  <br>
+  <label for="nome">Angular
+    <input type="checkbox" name="angular" ngModel>
+  </label>
+  <br>
+  <label for="nome">Vue
+    <input type="checkbox" name="vue" ngModel>
+  </label>
+  <br>
+  <label for="nome">React
+    <input type="checkbox" name="react" ngModel>
+  </label>
+  <br>
+  <br>
+  <select name="comida" ngModel>
+    <option value="">Selecione sua comida preferida</option>
+    <option value="x-salada">X-Salada</option>
+    <option value="x-bacon">X-Bacon</option>
+    <option value="coxinha">coxinha</option>
+  </select>
+
+  <button [disabled]="templateRef.invalid ">Enviar dados</button>
+</form>
+
+<br>
+<br>
+{{ templateRef.value | json}}

@@ -10,6 +10,7 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FoodListComponent } from './components/food-list/food-list.component';
 import { FoodAddComponent } from './components/food-add/food-add.component';
+import { FormsComponent } from './components/forms/forms.component';
 
 
 
@@ -21,7 +22,8 @@ import { FoodAddComponent } from './components/food-add/food-add.component';
     TodoListComponent,
     HomeComponent,
     FoodListComponent,
-    FoodAddComponent
+    FoodAddComponent,
+    FormsComponent
   ],
   imports: [
     CommonModule, FormsModule, HttpClientModule
