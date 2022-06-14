@@ -1,0 +1,30 @@
+<form [formGroup]="newInput" (ngSubmit)="imprimindoDados(newInput)">
+  <input type="text" formControlName="firstInput">
+  <span *ngIf="newInput.get('firstInput')?.errors && (newInput.get('firstInput')?.touched && newInput.get('firstInput')?.dirty)">favor adicionar o nome</span>
+  <p> firstInput errors {{ newInput.get('firstInput')?.errors | json}}</p>
+  <br>
+  <br>
+
+  <input type="text" formControlName="lastName">
+  <span *ngIf="newInput.get('lastName')?.errors?.maxlength"> tamanho maximo permitido de {{ newInput.get('lastName')?.errors?.maxlength?.requiredLength | json}} letras</span>
+  <p> lastName errors {{ newInput.get('lastName')?.errors | json}}</p>
+  <br>
+  <br>
+
+  <input type="email" formControlName="email">
+  <span *ngIf="newInput.get('email')?.errors?.maxlength"> tamanho maximo permitido de {{ newInput.get('email')?.errors?.maxlength?.requiredLength | json}} letras</span>
+  <span *ngIf="newInput.get('email')?.errors && newInput.get('email')?.touched"> Email incorreto</span>
+  <p> lastName errors {{ newInput.get('email')?.errors | json}}</p>
+  <br>
+  <br>
+
+  <div class="margin">
+    <mat-checkbox formControlName="checkboxBB"></mat-checkbox>
+  </div>
+
+  <button [disabled]="newInput.invalid">Envie sua resposta</button>
+</form>
+
+
+<p> dirty {{ newInput.get('firstInput')?.dirty | json}}</p>
+<p> touched {{ newInput.get('firstInput')?.touched | json}}</p>
